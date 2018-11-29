@@ -29,7 +29,8 @@ class ConfigurationLoader
             $data['database']['host'],
             $data['database']['name'],
             $data['database']['user'],
-            $data['database']['password']
+            $data['database']['password'],
+            $data['selenium']['host']
         );
     }
 }

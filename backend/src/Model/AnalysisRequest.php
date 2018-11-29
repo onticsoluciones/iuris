@@ -8,13 +8,23 @@ class AnalysisRequest
 {
     /** @var WebDriver */
     private $webdriver;
+    /**
+     * @var Analysis
+     */
+    private $analysis;
 
     /**
      * @param WebDriver $webdriver
+     * @param Analysis $analysis
      */
-    public function __construct(WebDriver $webdriver)
+    public function __construct
+    (
+        WebDriver $webdriver,
+        Analysis $analysis
+    )
     {
         $this->webdriver = $webdriver;
+        $this->analysis = $analysis;
     }
 
     /**

@@ -37,16 +37,22 @@ class WebsiteAnalyzer
      */
     public function analyze($url)
     {
-        $results = [];
+        $analysis = new Analysis($url, [], new \DateTime(), null);
 
         $driver = RemoteWebDriver::create($this->configuration->getSeleniumHost(), DesiredCapabilities::chrome());
         $driver->get($url);
         
-        $analysisRequest = new AnalysisRequest($driver);
+        $analysisRequest = new AnalysisRequest($driver, $analysis);
         foreach($this->pluginLoader->findAll() as $scanner)
         {
+            // Run analyzer
+            $start = new \DateTime();
             $result = $scanner->analyze($analysisRequest);
-            $results[] = $result;
+            $result = $result->setStartedAt($start)->setFinishedAt(new \DateTime());
+            
+            // Append obtained result to the global analysis
+            $analysis = $analysis->addDetails($result);
+            
             if($result->getFlags() & Flag::StopProcessing)
             {
                 break;
@@ -54,6 +60,6 @@ class WebsiteAnalyzer
         }
         $driver->close();
         
-        return new Analysis($url, new \DateTime(), $results);
+        return $analysis->setFinishedAt(new \DateTime());
     }
 }

@@ -35,16 +35,20 @@ class CreateInitialSchema extends AbstractMigration
         $this
             ->table('analysis')
             ->addColumn('url', 'string', [ 'limit' => 255 ])
-            ->addColumn('created', 'datetime')
+            ->addColumn('started_at', 'datetime')
+            ->addColumn('finished_at', 'datetime')
             ->create()
             ;
         
         $this
             ->table('analysis_detail')
             ->addColumn('analysis_id', 'integer')
+            ->addColumn('analyzer', 'string')
             ->addColumn('flags', 'integer')
             ->addColumn('score', 'integer')
             ->addColumn('message', 'text', [ 'limit' => 65535 ])
+            ->addColumn('started_at', 'datetime')
+            ->addColumn('finished_at', 'datetime')
             ->addForeignKey('analysis_id', 'analysis', 'id', [
                 'update' => 'CASCADE',
                 'delete' => 'CASCADE'

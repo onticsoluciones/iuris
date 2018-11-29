@@ -15,6 +15,19 @@ class DummyPlugin implements IPlugin
      */
     function analyze(AnalysisRequest $request)
     {
-        return new AnalysisDetail(Flag::Scorable, 100, 'Todo correcto');
+        return new AnalysisDetail(
+            $this->getName(), 
+            Flag::Scorable, 
+            100, 
+            'Todo correcto'
+        );
+    }
+
+    /**
+     * @return string
+     */
+    function getName()
+    {
+        return 'dummy';
     }
 }
