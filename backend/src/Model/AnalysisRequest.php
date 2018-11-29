@@ -34,4 +34,12 @@ class AnalysisRequest
     {
         return $this->webdriver;
     }
+
+    /**
+     * @return Analysis
+     */
+    public function getAnalysis()
+    {
+        return $this->analysis;
+    }
 }
