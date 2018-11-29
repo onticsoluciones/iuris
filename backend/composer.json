@@ -5,7 +5,8 @@
         "symfony/config": "^3.4",
         "symfony/yaml": "^3.4",
         "robmorgan/phinx": "^0.10.6",
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "ext-json": "*"
     },
     "autoload": {
         "psr-4": {"Ontic\\Iuris\\": "src/"}
