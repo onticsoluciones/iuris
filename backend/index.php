@@ -12,6 +12,7 @@ try
     $service = ContainerFactory::get()->get(AnalysisService::class);
     $responseBody = $service->processUrl($url);
     
+    header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
     echo $responseBody;
     die;
