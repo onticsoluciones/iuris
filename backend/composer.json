@@ -1,0 +1,13 @@
+{
+    "require": {
+        "facebook/webdriver": "^1.6",
+        "symfony/dependency-injection": "^3.4",
+        "symfony/config": "^3.4",
+        "symfony/yaml": "^3.4",
+        "robmorgan/phinx": "^0.10.6",
+        "ext-pdo": "*"
+    },
+    "autoload": {
+        "psr-4": {"Ontic\\Iuris\\": "src/"}
+    }
+}

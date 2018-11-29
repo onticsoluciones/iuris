@@ -1,0 +1,21 @@
+services:
+  _defaults:
+    autowire: true
+    public: true
+
+  Ontic\Iuris\Service\:
+    resource: './src/Service/*'
+    
+  Ontic\Iuris\Service\PluginLoader:
+    arguments: 
+      $pluginDir: '%plugin_dir%'
+      
+  Ontic\Iuris\Model\Configuration:
+    factory: Ontic\Iuris\Service\ConfigurationLoader:load
+    
+  Ontic\Iuris\Model\Connection:
+    factory: Ontic\Iuris\Service\Factory\ConnectionFactory:get
+    
+  Ontic\Iuris\Service\ConfigurationLoader:
+    arguments:
+      $configFile: '%configuration_file%'
