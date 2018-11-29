@@ -1,0 +1,7 @@
+database:
+  host: localhost
+  name: name
+  user: name
+  password: name
+selenium:
+  host: http://localhost:4444/wd/hub
