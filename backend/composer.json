@@ -6,7 +6,9 @@
         "symfony/yaml": "^3.4",
         "robmorgan/phinx": "^0.10.6",
         "ext-pdo": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+        "phpoffice/phpword": "^0.15.0",
+        "dompdf/dompdf": "^0.8.2"
     },
     "autoload": {
         "psr-4": {"Ontic\\Iuris\\": "src/"}

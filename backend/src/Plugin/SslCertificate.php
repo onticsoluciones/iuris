@@ -27,18 +27,18 @@ class SslCertificate implements IPlugin
         {
             stream_socket_client('ssl://' . $orignal_parse . ':443', $errno, $errstr, 30, STREAM_CLIENT_CONNECT, $get);
             $score = 100;
-            $message = 'SSL Certificate correct and up to date.';
+            $message = '✓ SSL Certificate correct and up to date.';
         } 
         catch (\Exception $e)
         {
             if (strpos($e->getMessage(), 'SSL Certificate verify failed') === false)
             {
                 $score = 0;
-                $message = "SSL Certificate failed.\nCheck your SSL installation in " . $url;
+                $message = "✗ SSL Certificate failed.\nCheck your SSL installation in " . $url;
             } 
             else
             { //Certificado invalido;
-                $message = "SSL Certificate invalid or outdate\n Please install a valid certificate and up to date for domain " . $url;
+                $message = "✗ SSL Certificate invalid or outdate\n Please install a valid certificate and up to date for domain " . $url;
                 $score = 0;
             }
         }

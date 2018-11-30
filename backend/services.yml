@@ -10,6 +10,10 @@ services:
     arguments: 
       $pluginDir: '%plugin_dir%'
       
+  Ontic\Iuris\Service\Renderer\PdfRenderer:
+    arguments:
+      $rootDir: '%root_dir%'
+      
   Ontic\Iuris\Model\Configuration:
     factory: Ontic\Iuris\Service\ConfigurationLoader:load
     
