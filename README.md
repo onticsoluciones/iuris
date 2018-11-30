@@ -22,7 +22,7 @@ cd iuris
 docker-compose --build -d
 ```
 
-Connect to iuris in http://localhost:8080
+Connect to iuris in http://localhost:8081
 
 
 
