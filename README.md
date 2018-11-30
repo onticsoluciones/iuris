@@ -1,3 +1,6 @@
+
+![alt text](https://github.com/onticsoluciones/iuris/blob/master/frontend/logo.png)
+
 # iuris
 Web audit tool for verification of compliance with legislation such as the GDPR, LOPD and LSSI autonomously, without relying on third parties, and complemented by a guide of tips to comply with them.
 
