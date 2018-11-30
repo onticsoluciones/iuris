@@ -19,7 +19,11 @@ class CookieNoticePlugin implements IPlugin
         '/politica-cookies',
         '/index.php/politica-de-cookies',
         '/politica-de-cookies.html',
-        '/politica_cookies'
+        '/politica_cookies',
+	'/politica-cookies.jsp',
+	'/informacion-sobre-cookies',
+	'/uso-de-cookies',
+	'/politicaCookies.jsp'
     ];
     
     /**
