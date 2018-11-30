@@ -8,6 +8,9 @@ use Ontic\Iuris\Service\Factory\ContainerFactory;
 try
 {
     $url = $_GET['url'];
+    if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+        $url = "http://" . $url;
+    }
     /** @var AnalysisService $service */
     $service = ContainerFactory::get()->get(AnalysisService::class);
     $responseBody = $service->processUrl($url);
@@ -20,5 +23,6 @@ try
 catch (Exception $e)
 {
     header('HTTP/1.1 500 Internal Server Error');
+    error_log($e);
 }
 
