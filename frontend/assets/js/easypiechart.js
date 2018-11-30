@@ -218,7 +218,7 @@ var EasyPieChart = function(el, opts) {
 		scaleLength: 5,
 		lineCap: 'round',
 		lineWidth: 6,
-		size: 110,
+		size: 75,
 		rotate: 0,
 		animate: {
 			duration: 1000,
