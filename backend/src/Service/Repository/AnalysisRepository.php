@@ -3,6 +3,7 @@
 namespace Ontic\Iuris\Service\Repository;
 
 use Ontic\Iuris\Model\Analysis;
+use Ontic\Iuris\Model\AnalysisDetail;
 use Ontic\Iuris\Model\Connection;
 
 class AnalysisRepository
@@ -16,6 +17,51 @@ class AnalysisRepository
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
+    }
+
+    /**
+     * @param int $analysisId
+     * @return Analysis|null
+     */
+    public function load($analysisId)
+    {
+        $sql = 'SELECT * FROM analysis WHERE id = :id;';
+        $statement = $this->connection->prepare($sql);
+        $statement->execute([ 'id' => $analysisId ]);
+        
+        if(!($row = $statement->fetch()))
+        {
+            return null;
+        }
+        
+        $url = $row['url'];
+        $startedAt = \DateTime::createFromFormat('Y-m-d H:i:s', $row['started_at']);
+        $finishedAt = \DateTime::createFromFormat('Y-m-d H:i:s', $row['finished_at']);
+        
+        $sql = 'SELECT * FROM analysis_detail WHERE analysis_id = :id;';
+        $statement = $this->connection->prepare($sql);
+        $statement->execute([ 'id' => $analysisId ]);
+        
+        $details = array_map(function($row)
+        {
+            $analyzer = $row['analyzer'];
+            $flags = $row['flags'];
+            $score = $row['score'];
+            $message = $row['message'];
+            $startedAt = \DateTime::createFromFormat('Y-m-d H:i:s', $row['started_at']);
+            $finishedAt = \DateTime::createFromFormat('Y-m-d H:i:s', $row['finished_at']);
+            
+            return new AnalysisDetail(
+                $analyzer, 
+                $flags, 
+                $score, 
+                $message, 
+                $startedAt, 
+                $finishedAt
+            );
+        }, $statement->fetchAll());
+        
+        return new Analysis($url, $details, $startedAt, $finishedAt);
     }
 
     /**
