@@ -1,65 +1,87 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"> 
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Iuris - </title> 
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="assets/materialize/css/materialize.min.css" media="screen,projection" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Iuris</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="assets/materialize/css/materialize.min.css" media="screen,projection"/>
     <!-- Bootstrap Styles-->
-    
+
     <!-- FontAwesome Styles-->
-    
+    <link rel="stylesheet" href="assets/css/font-awesome.css"/>
+
     <!-- Morris Chart Styles-->
-    
+
     <!-- Custom Styles-->
-    <link href="assets/css/custom-styles2.css" rel="stylesheet" />
+    <link href="assets/css/custom-styles2.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/index.css"/>
+
     <!-- Google Fonts-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css"> 
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css">
 </head>
 
-<body style="max-width:40%; margin:0 auto;">
+<body>
 
-<br><br>
-<div align="center"> <p><img src="logo.png" alt=""  </p></div>
+    <div id="spinner">
+        <i class="fa fa-spinner fa-spin"></i>
+    </div>
 
-         <div align="center"><div class="input-field col s13">
-		 <label for="textarea" class="">URL to scan</label>
-        			<textarea id="textarea" class="materialize-textarea"></textarea>
-        			
-         </div>
-								
-     <br> <input type="checkbox" id="indeterminate-checkbox">
-      <label for="indeterminate-checkbox">Accept Policy Privacy</label>
-	  <p></p>By submitting your file to Iuris you are asking Iuris to share your submission with the security community and agree to our Terms of Service and Privacy Policy. Learn more.
-    </p>
-   <br><br><a href="../dashboard.html"><a class="waves-effect waves-light btn-large">Scan</a><p></p></a>
-						 </div></div>
-				 <br><br><div align="center"><footer><p><a href="https://www.iuris.es/">Iuris - All rights reserved   </a>|<a href="https://www.iuris.es/"> Privacy Policy   </a></p>
-				 <div align="center"></div>
-				 
-				 </footer></div>
-				 
-				</div>
-             <!-- /. PAGE INNER  -->
+    <div id="content">
+        <br><br>
+        <div align="center"><p><img src="logo.png" alt=""></p></div>
+
+        <div align="center">
+            <div class="input-field col s13">
+                <label for="url" class="">URL to scan</label>
+                <input id="url" class="materialize-textarea" />
+
             </div>
-         <!-- /. PAGE WRAPPER  -->
+
+            <br>
+            <br>
+            <a id="analyze" href="#" class="waves-effect waves-light btn-large">Scan</a>
         </div>
-     <!-- /. WRAPPER  -->
+        
+        <br><br>
+        <div align="center">
+            <footer><p><a href="https://www.iuris.es/">Iuris - All rights reserved </a>|<a href="https://www.iuris.es/">
+                Privacy Policy </a></p>
+                <div align="center"></div>
+
+            </footer>
+        </div>
+        
+        <div id="result">
+            
+            <div>unconsented_tracking_cookies</div>
+            
+            <div>
+                ✗ Google Analytics: Used to throttle request rate. If Google Analytics is deployed via Google Tag Manager, this cookie will be named _dc_gtm_property-id.<br>
+                ✗ Google Analytics: Used to distinguish users.<br>
+                ✗ Google Analytics: Used to distinguish users.<br>
+                ? _fbp<br>
+                ? 2ae8a146f4fa929873a2033be865ab13
+            </div>
+            
+            
+        </div>
+        
+    </div>
     <!-- JS Scripts-->
     <!-- jQuery Js -->
     <script src="assets/js/jquery-1.10.2.js"></script>
-	
-	<!-- Bootstrap Js -->
+
+    <!-- Bootstrap Js -->
     <script src="assets/js/bootstrap.min.js"></script>
-	
-	<script src="assets/materialize/js/materialize.min.js"></script>
-	
+
+    <script src="assets/materialize/js/materialize.min.js"></script>
+
     <!-- Metis Menu Js -->
-		<script src="assets/js/jquery.metisMenu.js"></script> 
+    <script src="assets/js/jquery.metisMenu.js"></script>
     <!-- Custom Js -->
-    <script src="assets/js/custom-scripts.js"></script> 
+    <script type="text/javascript" src="assets/js/index.js"></script>
 
 </body>
 

@@ -1,0 +1,30 @@
+body
+{
+    position: relative;
+}
+
+#content
+{
+    width: 80%;
+    margin: 0 auto;
+}
+
+#spinner
+{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    opacity: 0.4;
+    text-align: center;
+    padding-top: 200px;
+    display: none;
+}
+
+#spinner i
+{
+    color: white;
+    font-size: 80px;
+}
