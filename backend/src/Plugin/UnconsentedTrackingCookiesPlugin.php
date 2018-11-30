@@ -70,7 +70,7 @@ class UnconsentedTrackingCookiesPlugin implements IPlugin
             }
             else
             {
-                $unknownCookies[] = '? ' . $name;
+                $unknownCookies[] = '⚠ ' . $name;
                 $totalScore += 50;
             }
         }

@@ -1,0 +1,22 @@
+FROM ubuntu:latest
+ENV TZ=Europe/Madrid
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN apt update && apt -y install git php-zip wget php-sqlite3 php-cli php-mysql php-phar php-curl php-mbstring php-json nginx php-fpm
+RUN cd /home && git clone https://github.com/onticsoluciones/iuris
+RUN cd /home/iuris/backend && wget https://raw.githubusercontent.com/composer/getcomposer.org/1b137f8bf6db3e79a38a5bc45324414a6b1f9df2/web/installer -q -O composer-setup.php
+RUN cd /home/iuris/backend && php composer-setup.php && php composer.phar update && php composer.phar install
+#RUN cp /home/iuris/backend/parameters.yml.dist /home/iuris/backend/parameters.yml && cp /home/iuris/backend/phinx.yml.dist /home/iuris/backend/phinx.yml 
+#RUN cd /home/iuris/backend && ./vendor/bin/phinx migrate
+#RUN cd /hoeme/iuris/backend  && php -S localhost:8080
+#RUN cd /home/uris/frontend && php -S localhost:8081
+COPY parameters.yml /home/iuris/backend/parameters.yml
+COPY phinx.yml /home/iuris/backend/phinx.yml
+COPY iuris.nginx /etc/nginx/sites-available/default
+COPY start.sh /start.sh
+EXPOSE 8080/tcp
+EXPOSE 8081/tcp
+ENTRYPOINT bash -c '/start.sh'
+
+
+
+

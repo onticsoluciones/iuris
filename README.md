@@ -13,7 +13,20 @@ Web audit tool for verification of compliance with legislation such as the GDPR,
 - Latest version of Google Chrome
 
 # Quick start
+### Docker Installation
+Require version docker-compose 1.17+ and docker-ce 5.18+
 
+```
+git clone https://github.com/onticsoluciones/iuris.git
+cd iuris
+docker-compose --build -d
+```
+
+Connect to iuris in http://localhost:8081
+
+
+
+### Manual Installation
 ##### Download ChromeDriver and place it inside $PATH
 
 ```sh

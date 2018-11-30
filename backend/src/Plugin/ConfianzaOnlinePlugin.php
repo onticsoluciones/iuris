@@ -29,13 +29,13 @@ class ConfianzaOnlinePlugin implements IPlugin
             $xpath = "//a[starts-with(@href, 'https://www.confianzaonline.es/empresas/')]";
             $request->getWebdriver()->findElement(WebDriverBy::xpath($xpath));
             $score = 100;
-            $message = 'Website enrolled in the Confianza Online program.';
+            $message = '✓ Website enrolled in the Confianza Online program.';
         } 
         /** @noinspection PhpRedundantCatchClauseInspection */ 
         catch(NoSuchElementException $ignored)
         {
             $score = 0;
-            $message = 'Enroll in the Confianza Online program to increase your website reputation.';
+            $message = '⚠ Enroll in the Confianza Online program to increase your website reputation.';
         }
         
         return new AnalysisDetail(

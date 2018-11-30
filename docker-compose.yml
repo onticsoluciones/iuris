@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+   db:
+     image: mysql:5.7
+     environment:
+        - MYSQL_DATABASE=name
+        - MYSQL_ROOT_PASSWORD=name
+        - MYSQL_USER=name
+        - MYSQL_PASSWORD=name
+     volumes:
+       - db_data:/var/lib/mysql
+     restart: always
+     ports:
+      - "3306:3306"
+
+   selenium:
+     image: selenium/standalone-chrome-debug
+     ports:
+      - "4444:4444"  
+   iuris:
+     build:
+       context: "."
+       dockerfile: ./iuris.docker
+     depends_on:
+         - db
+         - selenium
+     ports:
+      - "8080:8080"
+      - "8081:8081"  
+volumes:
+     db_data:
