@@ -19,7 +19,8 @@ Require version docker-compose 1.17+ and docker-ce 5.18+
 ```
 git clone https://github.com/onticsoluciones/iuris.git
 cd iuris
-docker-compose --build -d```
+docker-compose --build -d
+```
 
 Connect to iuris in http://localhost:8080
 
