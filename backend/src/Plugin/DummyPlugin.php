@@ -2,12 +2,11 @@
 
 namespace Ontic\Iuris\Plugin;
 
-use Ontic\Iuris\Interfaces\IPlugin;
 use Ontic\Iuris\Model\AnalysisDetail;
 use Ontic\Iuris\Model\AnalysisRequest;
 use Ontic\Iuris\Model\Flag;
 
-class DummyPlugin implements IPlugin
+class DummyPlugin
 {
     /**
      * @param AnalysisRequest $request
