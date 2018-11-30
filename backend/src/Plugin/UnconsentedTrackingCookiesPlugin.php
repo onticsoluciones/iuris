@@ -30,7 +30,8 @@ class UnconsentedTrackingCookiesPlugin implements IPlugin
         'GUEST_LANGUAGE_ID' => 'Language selected by the user',
         'ASP.NET_SessionId' => 'dotNet Session Cookie',
         'citrix_ns_id' => 'Citrix Firewall Session Cookie',
-        'adaptive_image' => 'Use by Drupal to determine the optimal size of images'
+        'adaptive_image' => 'Use by Drupal to determine the optimal size of images',
+	'__cfduid' => 'Cloudfare session cookie'
     ];
     
     /**
