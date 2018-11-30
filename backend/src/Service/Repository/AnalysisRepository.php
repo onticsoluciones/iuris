@@ -20,6 +20,7 @@ class AnalysisRepository
 
     /**
      * @param Analysis $analysis
+     * @return int
      */
     public function save(Analysis $analysis)
     {
@@ -52,5 +53,7 @@ class AnalysisRepository
         }
         
         $this->connection->commit();
+        
+        return $analysisId;
     }
 }

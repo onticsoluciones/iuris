@@ -42,9 +42,11 @@ class AnalysisService
         $analysis = $this->analyzer->analyze($url);
 
         // Save the results to the database
-        $this->repository->save($analysis);
+        $analysisId = $this->repository->save($analysis);
 
         // Serve the results as a JSON object
-        return json_encode($this->serializer->serialize($analysis));
+        $analysisData = $this->serializer->serialize($analysis);
+        $analysisData['id'] = $analysisId;
+        return json_encode($analysisData);
     }
 }
