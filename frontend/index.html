@@ -1,22 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"> 
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iuris - </title> 
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="assets/materialize/css/materialize.min.css" media="screen,projection" />
+    <!-- Bootstrap Styles-->
+    
+    <!-- FontAwesome Styles-->
+    
+    <!-- Morris Chart Styles-->
+    
+    <!-- Custom Styles-->
+    <link href="assets/css/custom-styles2.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css"> 
 </head>
-<body>
 
-<form>
-    <label>
-        <input id="url" type="text" placeholder="URL">
-    </label>
-    <input id="analyze" type="submit" value="Analyze"/>
-</form>
+<body style="max-width:40%; margin:0 auto;">
 
-<div id="result"></div>
+<br><br>
+<div align="center"> <p><img src="logo.png" alt=""  </p></div>
 
-<script type="text/javascript" src="lib/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="index.js"></script>
+         <div align="center"><div class="input-field col s13">
+		 <label for="textarea" class="">URL to scan</label>
+        			<textarea id="textarea" class="materialize-textarea"></textarea>
+        			
+         </div>
+								
+     <br> <input type="checkbox" id="indeterminate-checkbox">
+      <label for="indeterminate-checkbox">Accept Policy Privacy</label>
+	  <p></p>By submitting your file to Iuris you are asking Iuris to share your submission with the security community and agree to our Terms of Service and Privacy Policy. Learn more.
+    </p>
+   <br><br><a href="../dashboard.html"><a class="waves-effect waves-light btn-large">Scan</a><p></p></a>
+						 </div></div>
+				 <br><br><div align="center"><footer><p><a href="https://www.iuris.es/">Iuris - All rights reserved   </a>|<a href="https://www.iuris.es/"> Privacy Policy   </a></p>
+				 <div align="center"></div>
+				 
+				 </footer></div>
+				 
+				</div>
+             <!-- /. PAGE INNER  -->
+            </div>
+         <!-- /. PAGE WRAPPER  -->
+        </div>
+     <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+	
+	<!-- Bootstrap Js -->
+    <script src="assets/js/bootstrap.min.js"></script>
+	
+	<script src="assets/materialize/js/materialize.min.js"></script>
+	
+    <!-- Metis Menu Js -->
+		<script src="assets/js/jquery.metisMenu.js"></script> 
+    <!-- Custom Js -->
+    <script src="assets/js/custom-scripts.js"></script> 
 
 </body>
+
 </html>
