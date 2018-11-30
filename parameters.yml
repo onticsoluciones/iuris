@@ -1,0 +1,7 @@
+database:
+  host: db
+  name: name
+  user: name
+  password: name
+selenium:
+  host: http://selenium:4444/wd/hub
