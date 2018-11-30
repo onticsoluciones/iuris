@@ -13,7 +13,8 @@ class LegalNoticePlugin implements IPlugin
 {
     private $links = [
         '/aviso-legal',
-        '/aviso-legal.html'
+        '/aviso-legal.html',
+	'legal'
     ];
 
     /**
