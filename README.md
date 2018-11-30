@@ -13,7 +13,13 @@ Web audit tool for verification of compliance with legislation such as the GDPR,
 - Latest version of Google Chrome
 
 # Quick start
+### Docker Installation
+Mandatory version docker-compose 1.17+
+```docker-compose --build -d```
 
+
+
+### Manual Installation
 ##### Download ChromeDriver and place it inside $PATH
 
 ```sh
