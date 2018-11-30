@@ -2,8 +2,12 @@
 
 namespace Ontic\Iuris\Service;
 
+use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
+use Facebook\WebDriver\Remote\WebDriverBrowserType;
+use Facebook\WebDriver\Remote\WebDriverCapabilityType;
+use Facebook\WebDriver\WebDriverPlatform;
 use Ontic\Iuris\Model\Analysis;
 use Ontic\Iuris\Model\AnalysisRequest;
 use Ontic\Iuris\Model\Configuration;
@@ -38,8 +42,16 @@ class WebsiteAnalyzer
     public function analyze($url)
     {
         $analysis = new Analysis($url, [], new \DateTime(), null);
-
-        $driver = RemoteWebDriver::create($this->configuration->getSeleniumHost(), DesiredCapabilities::chrome());
+        
+        $chromeOptions = new ChromeOptions();
+        $chromeOptions->addArguments(['--headless']);
+        $capabilities = new DesiredCapabilities([
+            WebDriverCapabilityType::BROWSER_NAME => WebDriverBrowserType::CHROME,
+            WebDriverCapabilityType::PLATFORM => WebDriverPlatform::ANY,
+        ]);
+        $capabilities->setCapability(ChromeOptions::CAPABILITY, $chromeOptions);
+        
+        $driver = RemoteWebDriver::create($this->configuration->getSeleniumHost(), $capabilities);
         $driver->get($url);
         
         $analysisRequest = new AnalysisRequest($driver, $analysis);
