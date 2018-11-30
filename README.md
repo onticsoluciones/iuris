@@ -14,7 +14,8 @@ Web audit tool for verification of compliance with legislation such as the GDPR,
 
 # Quick start
 ### Docker Installation
-Mandatory version docker-compose 1.17+
+Mandatory version docker-compose 1.17+ and docker-ce 5.18+
+
 ```docker-compose --build -d```
 
 
