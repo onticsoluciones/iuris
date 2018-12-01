@@ -39,7 +39,7 @@ class SslCertificate implements IPlugin
             } 
             else
             { //Certificado invalido;
-                $message = "✗ Certificado SSL invalido o caducado. \n Por favor instale un certificado valido para el dominio" . $url "\n Los certificados SSL aumentan la seguridad de un sitio web y proporcionan confianza al usuario al evitar que se puedan ver comprometido y los datos viajan de forma cifrada;
+                $message = "✗ Certificado SSL invalido o caducado. \n Por favor instale un certificado valido para el dominio" . $url ."\n Los certificados SSL aumentan la seguridad de un sitio web y proporcionan confianza al usuario al evitar que se puedan ver comprometido y los datos viajan de forma cifrada";
                 $score = 0;
             }
         }
