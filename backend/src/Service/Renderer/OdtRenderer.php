@@ -41,56 +41,53 @@ class OdtRenderer
         //Title
         $title = $document->addSection();
         $title->addImage($this->rootDir.'/assets/logo_iuris.png');
-        $title->addText("Informe Técnico de ".$analysis->getUrl(),array('name'=>'Courier','bold'=>true, 'color'=>'000000', 'size'=>30),array('align'=>'center', 'spaceAfter'=>100));
+        $title->addText("Informe Técnico de ".$analysis->getUrl(),array('name'=>'Courier','bold'=>true, 'color'=>'000000', 'size'=>22),array('align'=>'center', 'spaceAfter'=>100));
         //$title->addText('______________________________________________________________________________________________'    );
-        $title->addTextBreak('1');
+        $title->addTextBreak('3');
+
+        $section = $document->addSection();
+
 
         foreach($analysis->getDetails() as $detail)
         {
-            $section = $document->addSection();
 
             // Title
             $table=$section->addTable();
             $table->addRow();
             if ($detail->getScore() == 100) {
-                $table->addCell()->addText("Verificación: ".$detail->getAnalyzer(),'titleOK');
-                $table->addCell()->addText("Puntuación: ".$detail->getScore(),'titleOK');
+                $table->addCell(2000)->addText("Verificación: ".$detail->getAnalyzer(),'titleOK');
+                $table->addCell(2000)->addText("Puntuación: ".$detail->getScore(),'titleOK');
             }
             elseif ($detail->getScore() >= 50 && $detail->getScore() < 100 ) {
-                $table->addCell()->addText("Verificación: ".$detail->getAnalyzer(),'titleWARN');
-                $table->addCell()->addText("Puntuación: ".$detail->getScore(),'titleWARN');
+                $table->addCell(2000)->addText("Verificación: ".$detail->getAnalyzer(),'titleWARN');
+                $table->addCell(2000)->addText("Puntuación: ".$detail->getScore(),'titleWARN');
             }
             else {
-                $table->addCell()->addText("Verificación: ".$detail->getAnalyzer(),'titleFAIL');
-                $table->addCell()->addText("Puntuación: ".$detail->getScore(),'titleFAIL');            }
+                $table->addCell(2000)->addText("Verificación: ".$detail->getAnalyzer(),'titleFAIL');
+                $table->addCell(2000)->addText("Puntuación: ".$detail->getScore(),'titleFAIL');            }
             // Message
             foreach(explode("\n", $detail->getMessage()) as $line)
             {
                 $table->addRow();
                 if ($detail->getScore() == 100){
-                    $cell = $table->addCell();
-                    $cell->addText($line)->setFontStyle('titleOK');
-                    $cell->getStyle()->setGridSpan(2);
-                }
+                    $table->addCell(null,array('gridSpan' => 3, 'vMerge' => 'restart'))->addText($line)->setFontStyle('titleOK');
+                 }
                 elseif(strpos($line,'⚠')!== FALSE){
                     // $section->addText('   * Información del Fallo','info');
-                    $cell = $table->addCell();
-                    $cell->addText($line)->setFontStyle('titleWARN');
-                    $cell->getStyle()->setGridSpan(2);
+                     $table->addCell(null,array('gridSpan' => 3, 'vMerge' => 'restart'))->addText($line)->setFontStyle('titleWARN');
                 }
                 else{
                     //$section->addText('   * Información del Fallo','info');
-                    $cell = $table->addCell();
-                    $cell-> addText($line)->setFontStyle('titleFAIL');
-                    $cell->getStyle()->setGridSpan(2);
+                    $table->addCell(null,array('gridSpan' => 3, 'vMerge' => 'restart'))->addText($line)->setFontStyle('titleFAIL');
                 }
             }
             //$section->addText('______________________________________________________________________________________________'    );
             $section->addTextBreak('1');
         }
 
-            $section->addText('______________________________________________________________________________________________');
-            $section->addTextBreak('3');
+            //$section->addText('__________________________________________________________________________');
+            //$section->addTextBreak('3');
+            $section = $document->addSection();
 
             if ($analysis->getGlobalScore() == 100) {
                 $section->addText("Puntuación Total: " . round($analysis->getGlobalScore()), 'titleOK');
