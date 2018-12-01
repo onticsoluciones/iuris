@@ -96,4 +96,10 @@ php -S localhost:8080
 ```sh
 cd ~/iuris/frontend
 php -S localhost:8081
+
+
+#### Launch web
+Navigate to http://localhost:8081/ with your favorite browser
+Enjoy!
+
 ```
