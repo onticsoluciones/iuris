@@ -44,7 +44,7 @@ class ConfianzaOnlinePlugin implements IPlugin
         catch(NoSuchElementException $ignored)
         {
             $score = 0;
-            $message = '⚠ Es recomendable formar parte del programa Confianza Online para aumentar la reputación del sitio web. Recomendamos visitar la web https://www.confianzaonline.es/empresas/unete-a-confianza-online/ para verificar los requisitos y adherirse al programa y adquirir el sello para incrustar en la web.';
+            $message = '⚠ Es recomendable formar parte del programa Confianza Online para aumentar la reputación del sitio web. Recomendamos visitar la web https://www.confianzaonline.es/empresas/unete-a-confianza-online/ para verificar los requisitos, adherirse al programa y adquirir el sello para incrustar en la web.';
         }
         
         return new AnalysisDetail(

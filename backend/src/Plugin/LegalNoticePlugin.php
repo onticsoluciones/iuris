@@ -35,7 +35,7 @@ class LegalNoticePlugin implements IPlugin
     function analyze(AnalysisRequest $request, array $config)
     {
         $score = 0;
-        $message = '✗ No se ha encontrado el aviso legal. El aviso legal de la web debe contener el conjunto de referencias de caracter legal, como Registro Mercantil, LSSI, Razón Social, etc ';
+        $message = '✗ No se ha encontrado el aviso legal en el sitio web. El aviso legal de la web debe contener el conjunto de referencias de caracter legal, como Registro Mercantil, LSSI, Razón Social, etc. Puede seguir la guía de https://www.aepd.es/herramientas/facilita.html donde encontrará una guia paso a paso para elaborarla.';
         
         foreach($this->getLinks($config['links']) as $link)
         {
