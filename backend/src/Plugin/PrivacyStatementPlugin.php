@@ -35,7 +35,7 @@ class PrivacyStatementPlugin implements IPlugin
     function analyze(AnalysisRequest $request, array $config)
     {
         $score = 0;
-        $message = '✗ No se ha encontrado política de privacidad. La política de privacidad es fundamental ya que en ella se determina los datos que se recogen, el tiempo que se conservan, a quien dirigirse en caso de querer ejercer los derechos de acceso, rectificacion, oposicion, cancelacion, portabilidad, olvido ...Puede seguir la guia de https://www.aepd.es/herramientas/facilita.html donde encontrará una guia paso a paso para elaborarla.';
+        $message = '✗ No se ha encontrado política de privacidad. La política de privacidad es fundamental ya que en ella se determina los datos que se recogen, el tiempo que se conservan, a quien dirigirse en caso de querer ejercer los derechos de acceso, rectificacion, oposicion, cancelacion, portabilidad y olvido. Puede seguir la guia de https://www.aepd.es/herramientas/facilita.html donde encontrará una guia paso a paso para elaborarla.';
 
         foreach($this->getLinks($config['links']) as $link)
         {
@@ -44,7 +44,7 @@ class PrivacyStatementPlugin implements IPlugin
                 $xpath = "//a[substring(@href, string-length(@href) - string-length('$link') +1) = '$link']";
                 $request->getWebdriver()->findElement(WebDriverBy::xpath($xpath));
                 $score = 100;
-                $message = '✓ El sito contiene política de privacidad.';
+                $message = '✓ El sito contiene política de privacidad válida.';
             }
             /** @noinspection PhpRedundantCatchClauseInspection */
             catch (NoSuchElementException $ignored)
