@@ -36,7 +36,7 @@ class LssiPlugin implements IPlugin
     function analyze(AnalysisRequest $request, array $config)
     {
         $score = 0;
-        $message = '✗ FAIL';
+        $message = '✗ El sitio web no cumple con la LSSI. Es obligatorio si la web tiene actividad lucrativa, como por ejemplo un comercio electronico, una web de contratacion de productos o servicios, etc que dentro de su aviso legal se especifique que cumple con la normativa LSSI (34/2002). En ella se deberá indicar los datos del registro mercantil, haciendo hincapié en la actividad de la empresa, CIF, dirección para dar visibilidad a los usuarios.  ';
         
         $webdriver = $request->getWebdriver();
         if($legalNoticePath = $this->getLegalNoticeUrl($webdriver, $config['urls']))
@@ -51,7 +51,7 @@ class LssiPlugin implements IPlugin
                 if(stripos($legalNoticeSource, $keyword) !== false)
                 {
                     $score = 100;
-                    $message = '✓ OK';
+                    $message = '✓ El sitio web cumple con LSSI. ';
                     break;
                 }
             }
