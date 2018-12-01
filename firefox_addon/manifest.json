@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "iuris",
+  "version": "1.0",
+  "description": "iuris compliant tool",
+  "homepage_url": "https://github.com/onticsoluciones/iuris",
+  "icons": {
+    "48": "icons/bookmark-it.png",
+    "96": "icons/bookmark-it@2x.png"
+  },
+
+  "permissions": [
+    "tabs"
+  ],
+
+  "browser_action": {
+    "default_icon": "icons/star-empty-38.png",
+    "default_title": "iuris"
+  },
+
+  "background": {
+    "scripts": ["background.js"]
+  }
+}
