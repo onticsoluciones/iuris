@@ -44,7 +44,7 @@ class CookieNoticePlugin implements IPlugin
                 $xpath = "//a[substring(@href, string-length(@href) - string-length('$link') +1) = '$link']";
                 $request->getWebdriver()->findElement(WebDriverBy::xpath($xpath));
                 $score = 100;
-                $message = '✓ El sitio muestra aviso de cookies..';
+                $message = '✓ El sitio web muestra un aviso de cookies válido.';
             } 
             /** @noinspection PhpRedundantCatchClauseInspection */
             catch (NoSuchElementException $ignored)
