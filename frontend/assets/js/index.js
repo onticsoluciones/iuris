@@ -16,13 +16,12 @@ jQuery(function() {
         url = "http://localhost:8080/?url=" + encodeURIComponent(url);
         
         ui.Spinner.show();
+        ui.Result.empty();
 
         jQuery
             .getJSON(url)
             .done(function(response)
             {
-                ui.Result.empty();
-                
                 var details = response.details;
                 
                 for(var i=0; i<details.length; i++)
@@ -41,7 +40,6 @@ jQuery(function() {
                         var p = jQuery("<p>").text(messages[j]);
                         messagesContainer.append(p);
                     }
-                    
                     
                     var color = "#30a5ff";
                     

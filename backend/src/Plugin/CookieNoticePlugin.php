@@ -11,21 +11,6 @@ use Ontic\Iuris\Model\Flag;
 
 class CookieNoticePlugin implements IPlugin
 {
-    private $links = [
-        '/politica-de-cookies',
-        '/cookies',
-        '/plugins/asesor-cookies-para-la-ley-en-espana',
-        '/politica_cookies-es.php',
-        '/politica-cookies',
-        '/index.php/politica-de-cookies',
-        '/politica-de-cookies.html',
-        '/politica_cookies',
-	'/politica-cookies.jsp',
-	'/informacion-sobre-cookies',
-	'/uso-de-cookies',
-	'/politicaCookies.jsp'
-    ];
-    
     /**
      * @return string
      */
@@ -36,14 +21,15 @@ class CookieNoticePlugin implements IPlugin
 
     /**
      * @param AnalysisRequest $request
+     * @param array $config
      * @return AnalysisDetail
      */
-    function analyze(AnalysisRequest $request)
+    function analyze(AnalysisRequest $request, array $config)
     {
         $score = 0;
         $message = '✗ No cookie notice page was found.';
         
-        foreach($this->getLinks() as $link)
+        foreach($this->getLinks($config['links']) as $link)
         {
             try
             {
@@ -66,9 +52,9 @@ class CookieNoticePlugin implements IPlugin
         );
     }
     
-    private function getLinks()
+    private function getLinks($links)
     {
-        foreach($this->links as $link)
+        foreach($links as $link)
         {
             yield $link;
             yield $link . '/';

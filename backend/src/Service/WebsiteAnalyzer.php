@@ -17,21 +17,26 @@ class WebsiteAnalyzer
 {
     /** @var PluginLoader */
     private $pluginLoader;
+    /** @var PluginConfigurationLoader */
+    private $pluginConfigurationLoader;
     /** @var Configuration */
     private $configuration;
 
     /**
      * @param PluginLoader $pluginLoader
+     * @param PluginConfigurationLoader $pluginConfigurationLoader
      * @param Configuration $configuration
      */
     public function __construct
     (
         PluginLoader $pluginLoader,
+        PluginConfigurationLoader $pluginConfigurationLoader,
         Configuration $configuration
     )
     {
         $this->pluginLoader = $pluginLoader;
         $this->configuration = $configuration;
+        $this->pluginConfigurationLoader = $pluginConfigurationLoader;
     }
 
     /**
@@ -57,9 +62,12 @@ class WebsiteAnalyzer
         $analysisRequest = new AnalysisRequest($driver, $analysis);
         foreach($this->pluginLoader->findAll() as $scanner)
         {
+            // Load plugin configuration
+            $configuration = $this->pluginConfigurationLoader->loadConfigForPlugin($scanner);
+            
             // Run analyzer
             $start = new \DateTime();
-            $result = $scanner->analyze($analysisRequest);
+            $result = $scanner->analyze($analysisRequest, $configuration);
             $result = $result->setStartedAt($start)->setFinishedAt(new \DateTime());
             
             // Append obtained result to the global analysis

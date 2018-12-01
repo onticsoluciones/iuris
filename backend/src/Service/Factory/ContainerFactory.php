@@ -20,6 +20,7 @@ class ContainerFactory
         $container->setParameter('root_dir', $rootDir);
         $container->setParameter('plugin_dir', $rootDir . '/src/Plugin');
         $container->setParameter('configuration_file', $rootDir . '/parameters.yml');
+        $container->setParameter('plugin_configuration_dir', $rootDir . '/config');
         $loader = new YamlFileLoader($container, new FileLocator($rootDir));
         $loader->load('services.yml');
         $container->compile();

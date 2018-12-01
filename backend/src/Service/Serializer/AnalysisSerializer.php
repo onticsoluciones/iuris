@@ -34,7 +34,7 @@ class AnalysisSerializer
         return [
             'analyzer' => $detail->getAnalyzer(),
             'flags' => $detail->getFlags(),
-            'score' => $detail->getScore(),
+            'score' => round($detail->getScore()),
             'message' => $detail->getMessage(),
             'started_at' => $detail->getStartedAt()->format('Y-m-d H:i:s'),
             'finished_at' => $detail->getFinishedAt()->format('Y-m-d H:i:s')
