@@ -99,3 +99,13 @@ php -S localhost:8081
 
 
 ```
+
+# Webservices
+
+## You can access statistics from server on (JSON response):
+
+localhost:8080/estadisticas
+
+## Webservice for external integrations (access scan funtionality programatically) on (JSON response):
+
+localhost:8080/?url={website_to_analyze}
