@@ -29,9 +29,6 @@ class PdfRenderer
     public function getPdf(Analysis $analysis)
     {
         $document = new PhpWord();
-        $scoreTotal = 0;
-        $scoreElem = 0;
-
         $document->addFontStyle('titleOK',array('bold'=>true,'size'=>14, 'color'=>'009933','name'=>'Helvetica'));
         $document->addFontStyle('mesOK',array('bold'=>true,'size'=>12, 'color'=>'009933','name'=>'DejaVu Sans'));
 
@@ -82,8 +79,6 @@ class PdfRenderer
                     $section->addText('   * Información del Fallo','info');
                     $section->addText($line,'mesFAIL');
                 }
-            $scoreTotal += $detail->getScore();
-            $scoreElem++;
             }
             //$section->addText('______________________________________________________________________________________________'    );
             $section->addTextBreak('1');
@@ -91,19 +86,19 @@ class PdfRenderer
         $section->addText('______________________________________________________________________________________________'    );
         $section->addTextBreak('3');
 
-        if (scoreTotal/$scoreElem == 100) {
-            $section->addText("Puntuación Total: ".round($scoreTotal/$scoreElem),'titleOK');
+        if ($analysis->getGlobalScore() == 100) {
+            $section->addText("Puntuación Total: ".round($analysis->getGlobalScore()),'titleOK');
             //Añadir SELLO
             $section->addImage($this->rootDir.'/assets/logocompliance.jpg');
 
 
         }
-        elseif (scoreTotal/$scoreElem >= 50 && $detail->getScore() < 100 ) {
-            $section->addText("Puntuación Total: ".round($scoreTotal/$scoreElem),'titleWARN');
+        elseif ($analysis->getGlobalScore() >= 50 && $detail->getScore() < 100 ) {
+            $section->addText("Puntuación Total: ".round($analysis->getGlobalScore()),'titleWARN');
 
         }
         else {
-            $section->addText("Puntuación Total: ".round($scoreTotal/$scoreElem),'titleFAIL');
+            $section->addText("Puntuación Total: ".round($analysis->getGlobalScore()),'titleFAIL');
         }
 
         //Footer
