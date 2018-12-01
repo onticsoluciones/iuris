@@ -55,15 +55,15 @@ class OdtRenderer
             $table=$section->addTable();
             $table->addRow();
             if ($detail->getScore() == 100) {
-                $table->addCell(2000)->addText("Verificación: ".$detail->getAnalyzer(),'titleOK');
+                $table->addCell(2000)->addText("- Verificación: ".$detail->getAnalyzer(),'titleOK');
                 $table->addCell(2000)->addText("Puntuación: ".$detail->getScore(),'titleOK');
             }
             elseif ($detail->getScore() >= 50 && $detail->getScore() < 100 ) {
-                $table->addCell(2000)->addText("Verificación: ".$detail->getAnalyzer(),'titleWARN');
+                $table->addCell(2000)->addText("- Verificación: ".$detail->getAnalyzer(),'titleWARN');
                 $table->addCell(2000)->addText("Puntuación: ".$detail->getScore(),'titleWARN');
             }
             else {
-                $table->addCell(2000)->addText("Verificación: ".$detail->getAnalyzer(),'titleFAIL');
+                $table->addCell(2000)->addText("- Verificación: ".$detail->getAnalyzer(),'titleFAIL');
                 $table->addCell(2000)->addText("Puntuación: ".$detail->getScore(),'titleFAIL');            }
             // Message
             foreach(explode("\n", $detail->getMessage()) as $line)
@@ -82,7 +82,7 @@ class OdtRenderer
                     $table2->addCell(4000,['gridSpan' => 2])->addText(htmlspecialchars($line,ENT_XML1))->setFontStyle('titleFAIL');
                 }
             }
-            //$section->addText('______________________________________________________________________________________________'    );
+            $section->addText('________________________________________________________________________'    );
             $section->addTextBreak('2');
         }
 
