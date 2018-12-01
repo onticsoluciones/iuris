@@ -13,7 +13,7 @@ try
     // Add the http:// prefix if needed
     if (!preg_match("~^(?:f|ht)tps?://~i", $url)) 
     {
-        $url = "http://" . $url;
+        $url = "https://" . $url;
     }
     
     // Validate the URL

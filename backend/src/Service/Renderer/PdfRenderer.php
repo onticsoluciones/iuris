@@ -47,7 +47,7 @@ class PdfRenderer
 
         //Title
         $title = $document->addSection();
-        $title->addImage($this->rootDir.'/assets/logo_iuris.png',array('width'=> 250,'height'=> 100,'wrappingStyle' => 'behind'));
+        $title->addImage($this->rootDir.'/assets/logo_iuris.png');
         $title->addText("Informe Técnico de ".$analysis->getUrl(),array('name'=>'Courier','bold'=>true, 'color'=>'000000', 'size'=>30),array('align'=>'center', 'spaceAfter'=>100));
         //$title->addText('______________________________________________________________________________________________'    );
         $title->addTextBreak('1');
@@ -88,17 +88,22 @@ class PdfRenderer
             //$section->addText('______________________________________________________________________________________________'    );
             $section->addTextBreak('1');
         }
+        $section->addText('______________________________________________________________________________________________'    );
+        $section->addTextBreak('3');
+
         if (scoreTotal/$scoreElem == 100) {
-            $section->addText("Puntuación Total: ".$scoreTotal/$scoreElem,'titleOK');
+            $section->addText("Puntuación Total: ".round($scoreTotal/$scoreElem),'titleOK');
+            //Añadir SELLO
+            $section->addImage($this->rootDir.'/assets/logocompliance.jpg');
+
 
         }
         elseif (scoreTotal/$scoreElem >= 50 && $detail->getScore() < 100 ) {
-            $section->addText("Puntuación Total: ".$scoreTotal/$scoreElem,'titleWARN');
+            $section->addText("Puntuación Total: ".round($scoreTotal/$scoreElem),'titleWARN');
 
         }
         else {
-            $section->addText("Puntuación Total: ".$scoreTotal/$scoreElem,'titleFAIL');
-
+            $section->addText("Puntuación Total: ".round($scoreTotal/$scoreElem),'titleFAIL');
         }
 
         //Footer
