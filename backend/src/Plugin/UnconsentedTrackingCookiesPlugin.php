@@ -61,11 +61,20 @@ class UnconsentedTrackingCookiesPlugin implements IPlugin
         
         $message = array_merge($trackingCookies, $sessionCookies, $unknownCookies);
         $message = implode("\n", $message);
-        
+
+	if(!count($cookies))
+	{
+	    $totalScore = '100';
+	}
+	else
+	{
+	    $totalScore = $totalScore / count($cookies);
+	}
+
         return new AnalysisDetail(
             $this->getCode(),
             Flag::Scorable,
-            $totalScore / count($cookies),
+            $totalScore,
             $message);
     }
 }
