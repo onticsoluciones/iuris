@@ -57,11 +57,21 @@
             
             <a id="analyze" href="#" class="waves-effect waves-light btn-large">Scan</a>
         </div>
-        
 
         <div id="result">
+
+            <div id="global-score-container" class="card" style="overflow: hidden;">
+                <div id="global-score" class="easypiechart" data-percent="50" style="display: inline-block; height: auto;">
+                    <span class="percent score">50%</span>
+                    <canvas height="1" width="60"></canvas>
+                </div>
+                <span style="display: inline-block; float: right; margin-top: 40px;">
+                    <a class="pdf-link" href="#" target="_blank"><img src="assets/img/pdf.png"></a>
+                    <a class="odt-link" href="#" target="_blank"><img src="assets/img/writer.png"></a>
+                </span>
+            </div>
             
-            <div class="card plugin-result-template">
+            <div class="card result-card plugin-result-template">
                 <div class="card-action">
                     <span class="title">unconsented_tracking_cookies</span>
                     <div align="right">
@@ -72,19 +82,21 @@
                     </div>
 
                     <div class="card-content messages"></div>
+                    
+                    <img class="report" src="assets/img/warn.png" title="Informar de un problema">
                 </div>
 
             </div>
             
         </div>
         
-        <div align="center">
+        <!--<div align="center">
             <footer><p><a href="https://www.iuris.es/">iuris - All rights reserved </a>|<a href="https://www.iuris.es/">
                 Privacy Policy </a></p>
                 <div align="center"></div>
 
             </footer>
-        </div>
+        </div>-->
         
     </div>
     <!-- JS Scripts-->
