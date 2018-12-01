@@ -17,6 +17,10 @@ services:
   Ontic\Iuris\Service\Renderer\PdfRenderer:
     arguments:
       $rootDir: '%root_dir%'
+
+  Ontic\Iuris\Service\Renderer\OdtRenderer:
+    arguments:
+      $rootDir: '%root_dir%'
       
   Ontic\Iuris\Model\Configuration:
     factory: Ontic\Iuris\Service\ConfigurationLoader:load
