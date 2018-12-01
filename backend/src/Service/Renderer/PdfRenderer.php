@@ -72,11 +72,11 @@ class PdfRenderer
             {
                 if ($detail->getScore() == 100) $section->addText($line,'mesOK');
                 elseif(strpos($line,'⚠')!== FALSE){
-                    $section->addText('   * Información del Fallo','info');
+                   // $section->addText('   * Información del Fallo','info');
                     $section->addText($line,'mesWARN');
                 }
                 else{
-                    $section->addText('   * Información del Fallo','info');
+                    //$section->addText('   * Información del Fallo','info');
                     $section->addText($line,'mesFAIL');
                 }
             }
