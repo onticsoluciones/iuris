@@ -7,8 +7,6 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 try
 {
-    $analysisId = $_GET['id'];
-    
     $container = ContainerFactory::get();
     /** @var PluginLoader $pluginLoader */
     $pluginLoader = $container->get(PluginLoader::class);
