@@ -28,18 +28,18 @@ class SslCertificate implements IPlugin
         {
             stream_socket_client('ssl://' . $orignal_parse . ':443', $errno, $errstr, 30, STREAM_CLIENT_CONNECT, $get);
             $score = 100;
-            $message = '✓ SSL Certificate correct and up to date.';
+            $message = '✓ El sitio web cuenta con un certificado SSL valido y en vigor';
         } 
         catch (\Exception $e)
         {
             if (strpos($e->getMessage(), 'SSL Certificate verify failed') === false)
             {
                 $score = 0;
-                $message = "✗ SSL Certificate failed.\nCheck your SSL installation in " . $url;
+                $message = "✗ Certificado SSL fallido.\nCheck your SSL installation in " . $url;
             } 
             else
             { //Certificado invalido;
-                $message = "✗ SSL Certificate invalid or outdate\n Please install a valid certificate and up to date for domain " . $url;
+                $message = "✗ Certificado SSL invalido o caducado. \n Por favor instale un certificado valido para el dominio" . $url "\n Los certificados SSL aumentan la seguridad de un sitio web y proporcionan confianza al usuario al evitar que se puedan ver comprometido y los datos viajan de forma cifrada;
                 $score = 0;
             }
         }

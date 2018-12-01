@@ -35,7 +35,7 @@ class LegalNoticePlugin implements IPlugin
     function analyze(AnalysisRequest $request, array $config)
     {
         $score = 0;
-        $message = '✗ No legal notice page was found.';
+        $message = '✗ No se ha encontrado el aviso legal. El aviso legal de la web debe contener el conjunto de referencias de caracter legal, como Registro Mercantil, LSSI, Razón Social, etc ';
         
         foreach($this->getLinks($config['links']) as $link)
         {
@@ -44,7 +44,7 @@ class LegalNoticePlugin implements IPlugin
                 $xpath = "//a[substring(@href, string-length(@href) - string-length('$link') +1) = '$link']";
                 $request->getWebdriver()->findElement(WebDriverBy::xpath($xpath));
                 $score = 100;
-                $message = '✓ Site contains a legal notice.';
+                $message = '✓ El sitio web contiene aviso legal.';
             } 
             /** @noinspection PhpRedundantCatchClauseInspection */
             catch (NoSuchElementException $ignored)

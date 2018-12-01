@@ -35,7 +35,7 @@ class CookieNoticePlugin implements IPlugin
     function analyze(AnalysisRequest $request, array $config)
     {
         $score = 0;
-        $message = '✗ No cookie notice page was found.';
+        $message = '✗ No se ha encontrado aviso de cookies en la web. Es obligatorio que el sitio web muestre un aviso para que el usuario acepte las cookies, asi como de disponer un enlace a la politica de cookies donde deben estar informadas las cookies que el sitio web';
         
         foreach($this->getLinks($config['links']) as $link)
         {
@@ -44,7 +44,7 @@ class CookieNoticePlugin implements IPlugin
                 $xpath = "//a[substring(@href, string-length(@href) - string-length('$link') +1) = '$link']";
                 $request->getWebdriver()->findElement(WebDriverBy::xpath($xpath));
                 $score = 100;
-                $message = '✓ Site contains a cookie notice.';
+                $message = '✓ El sitio muestra aviso de cookies..';
             } 
             /** @noinspection PhpRedundantCatchClauseInspection */
             catch (NoSuchElementException $ignored)
