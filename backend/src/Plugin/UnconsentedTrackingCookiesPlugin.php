@@ -45,11 +45,11 @@ class UnconsentedTrackingCookiesPlugin implements IPlugin
             
             if(isset($config['tracking_cookies'][$name]))
             {
-                $trackingCookies[] = '✗ Cookie sin consentimiento detectada' . $config['tracking_cookies'][$name];
+                $trackingCookies[] = '✗ ' . $name . ' Cookie sin consentimiento detectada: ' . $config['tracking_cookies'][$name];
             }
             elseif(isset($config['session_cookies'][$name]))
             {
-                $sessionCookies[] = '✓ Cookie de sesión' . $config['session_cookies'][$name];
+                $sessionCookies[] = '✓ ' . $name . ' Cookie de sesión: ' . $config['session_cookies'][$name];
                 $totalScore += 100;
             }
             else
