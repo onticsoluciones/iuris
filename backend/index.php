@@ -8,7 +8,7 @@ use Ontic\Iuris\Service\Factory\ContainerFactory;
 try
 {
     $url = $_GET['url'];
-    $selectedPlugins = explode(',', $_GET['selected_plugins']);
+    $selectedPlugins = explode(',', @$_GET['selected_plugins']);
     
     // Add the http:// prefix if needed
     if (!preg_match("~^(?:f|ht)tps?://~i", $url)) 
