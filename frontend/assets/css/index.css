@@ -37,3 +37,32 @@ body
 .easypiechart-blue .percent { color: #30a5ff;}
 .easypiechart-orange .percent { color: #ffb53e;}
 .easypiechart-red .percent { color: #ef4040;}
+
+.pdf-link img,
+.odt-link img
+{
+    width: 32px;
+    height: 32px;
+}
+
+#global-score-container { display: none; }
+
+#result .card-content
+{
+    min-height: 160px;
+}
+
+#result .report
+{
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    cursor: pointer;
+}
+
+#result .card-content.messages p
+{
+    margin: 0 100px 0 20px;
+}

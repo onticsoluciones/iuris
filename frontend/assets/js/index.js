@@ -8,8 +8,15 @@ jQuery(function()
         Result: jQuery("#result"),
         Spinner: jQuery("#spinner"),
         ResultTemplate: jQuery(".plugin-result-template").clone().removeClass("plugin-result-template"),
-        AvailablePlugins: jQuery(".available-plugins")
+        AvailablePlugins: jQuery(".available-plugins"),
+        GlobalScoreContainer: jQuery("#global-score-container"),
+        GlobalScore: jQuery("#global-score"),
+        GlobalScoreText: jQuery("#global-score .score"),
+        PdfLink: jQuery(".pdf-link"),
+        OdtLink: jQuery(".odt-link")
     };
+    
+    var availablePlugins = {};
 
     ui.AnalyzeButton.click(sendAnalysisRequest);
     
@@ -21,6 +28,8 @@ jQuery(function()
             .getJSON(url)
             .done(function(response)
             {
+                availablePlugins = response;
+                
                 for(var code in response)
                 {
                     if(!response.hasOwnProperty(code))
@@ -60,19 +69,37 @@ jQuery(function()
         var url = apiUrl + "/?url=" + encodeURIComponent(ui.UrlField.val()) + "&selected_plugins=" + selectedPlugins.join(',');
         
         ui.Spinner.show();
-        ui.Result.empty();
+        ui.GlobalScoreContainer.hide();
+        ui.Result.find(".result-card").empty();
 
         jQuery
             .getJSON(url)
             .done(function(response)
             {
+                ui.PdfLink.attr("href", apiUrl + "/pdf?id=" + response.id);
+                ui.OdtLink.attr("href", apiUrl + "/odt?id=" + response.id);
+                
+                ui.GlobalScore.attr("data-percent", response.score);
+                ui.GlobalScoreText.text(response.score + "%");
+                ui.GlobalScoreContainer.show();
+                
+                ui.GlobalScore.data("easyPieChart").options["barColor"] = getColorForScore(response.score);
+                ui.GlobalScore.data("easyPieChart").update(response.score);
+                
                 var details = response.details;
                 
                 for(var i=0; i<details.length; i++)
                 {
                     var detail = details[i];
                     var panel = ui.ResultTemplate.clone();
-                    panel.find(".title").html(detail.analyzer);
+                    
+                    var name = detail.analyzer;
+                    if(typeof availablePlugins[name] !== "undefined")
+                    {
+                        name = availablePlugins[name];
+                    }
+                    
+                    panel.find(".title").html(name);
                     panel.find(".score").html(detail.score + "%");
                     var chart = panel.find(".easypiechart");
                     chart.attr("data-percent", detail.score);
@@ -85,18 +112,7 @@ jQuery(function()
                         messagesContainer.append(p);
                     }
                     
-                    var color = "#30a5ff";
-                    
-                    if(detail.score < 100)
-                    {
-                        color = "#ffb53e";
-                    }
-                    
-                    if(detail.score < 50)
-                    {
-                        color = "#ef4040";
-                    }
-                    
+                    var color = getColorForScore(detail.score);
                     chart.css("color", color);
                     ui.Result.append(panel);
                     
@@ -115,5 +131,27 @@ jQuery(function()
         return false;
     }
     
+    function getColorForScore(score)
+    {
+        var color = "#30a5ff";
+
+        if(score < 100)
+        {
+            color = "#ffb53e";
+        }
+
+        if(score < 50)
+        {
+            color = "#ef4040";
+        }
+        
+        return color;
+    }
+    
     displayAvailablePlugins();
+    
+    ui.GlobalScore.easyPieChart({
+        scaleColor: false,
+        barColor: "#FF0000"
+    });
 });
