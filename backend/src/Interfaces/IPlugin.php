@@ -10,7 +10,12 @@ interface IPlugin
     /**
      * @return string
      */
-    function getName();
+    function getCode();
+
+    /**
+     * @return string
+     */
+    function getShortName();
 
     /**
      * @param AnalysisRequest $request

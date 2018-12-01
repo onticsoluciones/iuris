@@ -47,7 +47,7 @@ class SslCertificate implements IPlugin
         restore_error_handler();
 
         return new AnalysisDetail(
-            $this->getName(),
+            $this->getCode(),
             Flag::Scorable,
             $score,
             $message
@@ -57,8 +57,16 @@ class SslCertificate implements IPlugin
     /**
      * @return string
      */
-    function getName()
+    function getCode()
     {
         return 'ssl_certificate';
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortName()
+    {
+        return 'SSL';
     }
 }

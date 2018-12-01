@@ -14,9 +14,17 @@ class CookieNoticePlugin implements IPlugin
     /**
      * @return string
      */
-    function getName()
+    function getCode()
     {
         return 'cookie_notice';
+    }
+    
+    /**
+     * @return string
+     */
+    function getShortName()
+    {
+        return 'Cookie Notice';
     }
 
     /**
@@ -45,7 +53,7 @@ class CookieNoticePlugin implements IPlugin
         }
 
         return new AnalysisDetail(
-            $this->getName(),
+            $this->getCode(),
             Flag::Scorable,
             $score,
             $message
@@ -60,4 +68,5 @@ class CookieNoticePlugin implements IPlugin
             yield $link . '/';
         }
     }
+
 }

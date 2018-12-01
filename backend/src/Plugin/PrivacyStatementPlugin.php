@@ -14,9 +14,17 @@ class PrivacyStatementPlugin implements IPlugin
     /**
      * @return string
      */
-    function getName()
+    function getCode()
     {
         return 'privacy_statement';
+    }
+
+    /**
+     * @return string
+     */
+    function getShortName()
+    {
+        return 'Privacy Statement';
     }
 
     /**
@@ -45,7 +53,7 @@ class PrivacyStatementPlugin implements IPlugin
         }
 
         return new AnalysisDetail(
-            $this->getName(),
+            $this->getCode(),
             Flag::Scorable,
             $score,
             $message

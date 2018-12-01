@@ -12,9 +12,17 @@ class UnconsentedTrackingCookiesPlugin implements IPlugin
     /**
      * @return string
      */
-    function getName()
+    function getCode()
     {
         return 'unconsented_tracking_cokies';
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortName()
+    {
+        return 'Tracking Cookies';
     }
 
     /**
@@ -55,7 +63,7 @@ class UnconsentedTrackingCookiesPlugin implements IPlugin
         $message = implode("\n", $message);
         
         return new AnalysisDetail(
-            $this->getName(),
+            $this->getCode(),
             Flag::Scorable,
             $totalScore / count($cookies),
             $message);

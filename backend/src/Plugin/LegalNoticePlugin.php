@@ -14,9 +14,17 @@ class LegalNoticePlugin implements IPlugin
     /**
      * @return string
      */
-    function getName()
+    function getCode()
     {
         return 'legal_notice';
+    }
+
+    /**
+     * @return string
+     */
+    function getShortName()
+    {
+        return 'Legal Notice';
     }
 
     /**
@@ -45,7 +53,7 @@ class LegalNoticePlugin implements IPlugin
         }
 
         return new AnalysisDetail(
-            $this->getName(),
+            $this->getCode(),
             Flag::Scorable,
             $score,
             $message
