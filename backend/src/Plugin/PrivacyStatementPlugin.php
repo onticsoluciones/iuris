@@ -11,33 +11,33 @@ use Ontic\Iuris\Model\Flag;
 
 class PrivacyStatementPlugin implements IPlugin
 {
-    private $links = [
-        '/politica-de-privacidad',
-        '/politica-privacidad',
-        '/privacidad.php',
-        '/privacidad',
-        '/es/politica-de-privacidad',
-        '/privacidad.php'
-    ];
-    
     /**
      * @return string
      */
-    function getName()
+    function getCode()
     {
         return 'privacy_statement';
     }
 
     /**
+     * @return string
+     */
+    function getShortName()
+    {
+        return 'Privacy Statement';
+    }
+
+    /**
      * @param AnalysisRequest $request
+     * @param array $config
      * @return AnalysisDetail
      */
-    function analyze(AnalysisRequest $request)
+    function analyze(AnalysisRequest $request, array $config)
     {
         $score = 0;
         $message = '✗ No privacy statement was found.';
 
-        foreach($this->getLinks() as $link)
+        foreach($this->getLinks($config['links']) as $link)
         {
             try
             {
@@ -53,16 +53,16 @@ class PrivacyStatementPlugin implements IPlugin
         }
 
         return new AnalysisDetail(
-            $this->getName(),
+            $this->getCode(),
             Flag::Scorable,
             $score,
             $message
         );
     }
-    
-    private function getLinks()
+
+    private function getLinks($links)
     {
-        foreach($this->links as $link)
+        foreach($links as $link)
         {
             yield $link;
             yield $link . '/';

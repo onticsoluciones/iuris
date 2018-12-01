@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -41,28 +41,32 @@
             <a id="analyze" href="#" class="waves-effect waves-light btn-large">Scan</a>
         </div>
         
-        <br><br>
+
+        <div id="result">
+            
+            <div class="card plugin-result-template">
+                <div class="card-action">
+                    <span class="title">unconsented_tracking_cookies</span>
+                    <div align="right">
+                        <div class="easypiechart">
+                            <span class="percent score">82%</span>
+                            <canvas height="1" width="60"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card-content messages"></div>
+                </div>
+
+            </div>
+            
+        </div>
+        
         <div align="center">
-            <footer><p><a href="https://www.iuris.es/">Iuris - All rights reserved </a>|<a href="https://www.iuris.es/">
+            <footer><p><a href="https://www.iuris.es/">iuris - All rights reserved </a>|<a href="https://www.iuris.es/">
                 Privacy Policy </a></p>
                 <div align="center"></div>
 
             </footer>
-        </div>
-        
-        <div id="result">
-            
-            <div>unconsented_tracking_cookies</div>
-            
-            <div>
-                ✗ Google Analytics: Used to throttle request rate. If Google Analytics is deployed via Google Tag Manager, this cookie will be named _dc_gtm_property-id.<br>
-                ✗ Google Analytics: Used to distinguish users.<br>
-                ✗ Google Analytics: Used to distinguish users.<br>
-                ? _fbp<br>
-                ? 2ae8a146f4fa929873a2033be865ab13
-            </div>
-            
-            
         </div>
         
     </div>
@@ -77,6 +81,9 @@
 
     <!-- Metis Menu Js -->
     <script src="assets/js/jquery.metisMenu.js"></script>
+    
+    <script src="assets/js/easypiechart.js"></script>
+    
     <!-- Custom Js -->
     <script type="text/javascript" src="assets/js/index.js"></script>
 

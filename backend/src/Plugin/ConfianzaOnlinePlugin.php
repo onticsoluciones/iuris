@@ -13,16 +13,25 @@ class ConfianzaOnlinePlugin implements IPlugin
     /**
      * @return string
      */
-    function getName()
+    public function getShortName()
+    {
+        return 'Confianza Online';
+    }
+
+    /**
+     * @return string
+     */
+    function getCode()
     {
         return 'confianza_online';
     }
 
     /**
      * @param AnalysisRequest $request
+     * @param array $config
      * @return AnalysisDetail
      */
-    function analyze(AnalysisRequest $request)
+    function analyze(AnalysisRequest $request, array $config)
     {
         try
         {
@@ -39,7 +48,7 @@ class ConfianzaOnlinePlugin implements IPlugin
         }
         
         return new AnalysisDetail(
-            $this->getName(),
+            $this->getCode(),
             0,
             $score,
             $message

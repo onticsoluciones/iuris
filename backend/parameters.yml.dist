@@ -1,3 +1,5 @@
+general:
+  cache: 0
 database:
   host: localhost
   name: name

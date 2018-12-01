@@ -12,26 +12,37 @@ use Ontic\Iuris\Model\Analysis;
 use Ontic\Iuris\Model\AnalysisRequest;
 use Ontic\Iuris\Model\Configuration;
 use Ontic\Iuris\Model\Flag;
+use Ontic\Iuris\Service\Repository\AnalysisRepository;
 
 class WebsiteAnalyzer
 {
     /** @var PluginLoader */
     private $pluginLoader;
+    /** @var PluginConfigurationLoader */
+    private $pluginConfigurationLoader;
     /** @var Configuration */
     private $configuration;
+    /** @var AnalysisRepository */
+    private $analysisRepository;
 
     /**
      * @param PluginLoader $pluginLoader
+     * @param PluginConfigurationLoader $pluginConfigurationLoader
      * @param Configuration $configuration
+     * @param AnalysisRepository $analysisRepository
      */
     public function __construct
     (
         PluginLoader $pluginLoader,
-        Configuration $configuration
+        PluginConfigurationLoader $pluginConfigurationLoader,
+        Configuration $configuration,
+        AnalysisRepository $analysisRepository
     )
     {
         $this->pluginLoader = $pluginLoader;
         $this->configuration = $configuration;
+        $this->pluginConfigurationLoader = $pluginConfigurationLoader;
+        $this->analysisRepository = $analysisRepository;
     }
 
     /**
@@ -41,6 +52,15 @@ class WebsiteAnalyzer
      */
     public function analyze($url)
     {
+        if($age = $this->configuration->getCache())
+        {
+            $analysis = $this->analysisRepository->find($url, $age);
+            if($analysis !== null)
+            {
+                return $analysis;
+            }
+        }
+        
         $analysis = new Analysis($url, [], new \DateTime(), null);
         
         $chromeOptions = new ChromeOptions();
@@ -57,9 +77,12 @@ class WebsiteAnalyzer
         $analysisRequest = new AnalysisRequest($driver, $analysis);
         foreach($this->pluginLoader->findAll() as $scanner)
         {
+            // Load plugin configuration
+            $configuration = $this->pluginConfigurationLoader->loadConfigForPlugin($scanner);
+            
             // Run analyzer
             $start = new \DateTime();
-            $result = $scanner->analyze($analysisRequest);
+            $result = $scanner->analyze($analysisRequest, $configuration);
             $result = $result->setStartedAt($start)->setFinishedAt(new \DateTime());
             
             // Append obtained result to the global analysis

@@ -11,30 +11,33 @@ use Ontic\Iuris\Model\Flag;
 
 class LegalNoticePlugin implements IPlugin
 {
-    private $links = [
-        '/aviso-legal',
-        '/aviso-legal.html',
-	'legal'
-    ];
-
     /**
      * @return string
      */
-    function getName()
+    function getCode()
     {
         return 'legal_notice';
     }
 
     /**
+     * @return string
+     */
+    function getShortName()
+    {
+        return 'Legal Notice';
+    }
+
+    /**
      * @param AnalysisRequest $request
+     * @param array $config
      * @return AnalysisDetail
      */
-    function analyze(AnalysisRequest $request)
+    function analyze(AnalysisRequest $request, array $config)
     {
         $score = 0;
         $message = '✗ No legal notice page was found.';
         
-        foreach($this->getLinks() as $link)
+        foreach($this->getLinks($config['links']) as $link)
         {
             try
             {
@@ -50,16 +53,16 @@ class LegalNoticePlugin implements IPlugin
         }
 
         return new AnalysisDetail(
-            $this->getName(),
+            $this->getCode(),
             Flag::Scorable,
             $score,
             $message
         );
     }
     
-    private function getLinks()
+    private function getLinks($links)
     {
-        foreach($this->links as $link)
+        foreach($links as $link)
         {
             yield $link;
             yield $link . '/';

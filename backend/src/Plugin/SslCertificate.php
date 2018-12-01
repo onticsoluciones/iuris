@@ -11,9 +11,10 @@ class SslCertificate implements IPlugin
 {
     /**
      * @param AnalysisRequest $request
+     * @param array $config
      * @return AnalysisDetail
      */
-    function analyze(AnalysisRequest $request)
+    function analyze(AnalysisRequest $request, array $config)
     {
         $url = $request->getWebdriver()->getCurrentURL();
         $orignal_parse = parse_url($url, PHP_URL_HOST);
@@ -46,7 +47,7 @@ class SslCertificate implements IPlugin
         restore_error_handler();
 
         return new AnalysisDetail(
-            $this->getName(),
+            $this->getCode(),
             Flag::Scorable,
             $score,
             $message
@@ -56,8 +57,16 @@ class SslCertificate implements IPlugin
     /**
      * @return string
      */
-    function getName()
+    function getCode()
     {
         return 'ssl_certificate';
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortName()
+    {
+        return 'SSL';
     }
 }
