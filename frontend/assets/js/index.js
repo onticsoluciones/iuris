@@ -1,19 +1,63 @@
-jQuery(function() {
+jQuery(function() 
+{
+    var apiUrl = "http://localhost:8080";
 
     var ui = {
         UrlField: jQuery("#url"),
         AnalyzeButton: jQuery("#analyze"),
         Result: jQuery("#result"),
         Spinner: jQuery("#spinner"),
-        ResultTemplate: jQuery(".plugin-result-template").clone().removeClass("plugin-result-template")
+        ResultTemplate: jQuery(".plugin-result-template").clone().removeClass("plugin-result-template"),
+        AvailablePlugins: jQuery(".available-plugins")
     };
 
     ui.AnalyzeButton.click(sendAnalysisRequest);
+    
+    function displayAvailablePlugins()
+    {
+        var url = apiUrl + '/plugins';
+        
+        jQuery
+            .getJSON(url)
+            .done(function(response)
+            {
+                for(var code in response)
+                {
+                    if(!response.hasOwnProperty(code))
+                    {
+                        continue;
+                    }
+                    
+                    var displayName = response[code];
+                    
+                    var input = jQuery("<input>");
+                    input.attr("type", "checkbox");
+                    input.attr("id", "plugin-" + code);
+                    input.attr("checked", true);
+                    input.attr("data-plugin", code);
+                    input.addClass("selected-plugin");
+                    var label = jQuery("<label>");
+                    label.attr("for", "plugin-" + code);
+                    label.css("padding-left", "22px");
+                    label.css("padding-right", "10px");
+                    label.css("line-height", "20px");
+                    label.text(displayName);
+                    
+                    ui.AvailablePlugins.append(input);
+                    ui.AvailablePlugins.append(label);
+                }
+            });
+    }
 
     function sendAnalysisRequest()
     {
-        var url = ui.UrlField.val();
-        url = "http://localhost:8080/?url=" + encodeURIComponent(url);
+        var selectedPlugins = [];
+        jQuery(".selected-plugin:checked").each(function(index, element)
+        {
+            selectedPlugins.push(jQuery(element).data("plugin"));
+        });
+        
+        var url = apiUrl + "/?url=" + encodeURIComponent(ui.UrlField.val()) + "&selected_plugins=" + selectedPlugins.join(',');
         
         ui.Spinner.show();
         ui.Result.empty();
@@ -70,4 +114,6 @@ jQuery(function() {
 
         return false;
     }
+    
+    displayAvailablePlugins();
 });

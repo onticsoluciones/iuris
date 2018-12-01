@@ -33,13 +33,14 @@ class AnalysisService
 
     /**
      * @param string $url
+     * @param string[] $selectedPlugins
      * @return string
      * @throws \Exception
      */
-    public function processUrl($url)
+    public function processUrl($url, $selectedPlugins)
     {
         // Perform analysis
-        $analysis = $this->analyzer->analyze($url);
+        $analysis = $this->analyzer->analyze($url, $selectedPlugins);
 
         // Save the results to the database
         $analysisId = $this->repository->save($analysis);

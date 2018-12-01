@@ -47,10 +47,11 @@ class WebsiteAnalyzer
 
     /**
      * @param string $url
+     * @param string[] $selectedPlugins
      * @return Analysis
      * @throws \Exception
      */
-    public function analyze($url)
+    public function analyze($url, $selectedPlugins)
     {
         if($age = $this->configuration->getCache())
         {
@@ -77,6 +78,12 @@ class WebsiteAnalyzer
         $analysisRequest = new AnalysisRequest($driver, $analysis);
         foreach($this->pluginLoader->findAll() as $scanner)
         {
+            // Skip unselected plugins
+            if(count($selectedPlugins) > 0 && !in_array($scanner->getCode(), $selectedPlugins))
+            {
+                continue;
+            }
+            
             // Load plugin configuration
             $configuration = $this->pluginConfigurationLoader->loadConfigForPlugin($scanner);
             

@@ -8,6 +8,7 @@ use Ontic\Iuris\Service\Factory\ContainerFactory;
 try
 {
     $url = $_GET['url'];
+    $selectedPlugins = explode(',', $_GET['selected_plugins']);
     
     // Add the http:// prefix if needed
     if (!preg_match("~^(?:f|ht)tps?://~i", $url)) 
@@ -25,7 +26,7 @@ try
     
     /** @var AnalysisService $service */
     $service = ContainerFactory::get()->get(AnalysisService::class);
-    $responseBody = $service->processUrl($url);
+    $responseBody = $service->processUrl($url, $selectedPlugins);
     
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
