@@ -102,6 +102,6 @@ class Analysis
             }
         }
         
-        return $totalScore / $scorableLines;
+        return round($totalScore / $scorableLines);
     }
 }
