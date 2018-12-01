@@ -35,7 +35,7 @@ class CookieNoticePlugin implements IPlugin
     function analyze(AnalysisRequest $request, array $config)
     {
         $score = 0;
-        $message = '✗ No se ha encontrado aviso de cookies en la web. Es obligatorio que el sitio web muestre un aviso para que el usuario acepte las cookies, asi como de disponer un enlace a la politica de cookies donde deben estar informadas las cookies que el sitio web';
+        $message = '✗ No se ha encontrado aviso de cookies en la web. Es obligatorio que el sitio web muestre un aviso para que el usuario acepte las cookies, asi como de disponer un enlace a la politica de cookies donde deben estar informadas las cookies que el sitio web envia al usuario, el nombre de la cookie y su tipo. Puede seguir la guia de https://www.aepd.es/herramientas/facilita.html donde encontrará una guia paso a paso para elaborarla';
         
         foreach($this->getLinks($config['links']) as $link)
         {
