@@ -28,40 +28,27 @@ class AnalysisRepository
         $sql = 'SELECT * FROM analysis WHERE id = :id;';
         $statement = $this->connection->prepare($sql);
         $statement->execute([ 'id' => $analysisId ]);
+        $row = $statement->fetch();
         
-        if(!($row = $statement->fetch()))
-        {
-            return null;
-        }
-        
-        $url = $row['url'];
-        $startedAt = \DateTime::createFromFormat('Y-m-d H:i:s', $row['started_at']);
-        $finishedAt = \DateTime::createFromFormat('Y-m-d H:i:s', $row['finished_at']);
-        
-        $sql = 'SELECT * FROM analysis_detail WHERE analysis_id = :id;';
+        return $this->parse($row);
+    }
+
+    /**
+     * @param string $url
+     * @param int $age
+     * @return Analysis|null
+     */
+    public function find($url, $age)
+    {
+        $sql = 'SELECT * FROM analysis WHERE url = :url AND finished_at > (NOW() - INTERVAL :interval SECOND) ORDER BY finished_at DESC LIMIT 1;';
         $statement = $this->connection->prepare($sql);
-        $statement->execute([ 'id' => $analysisId ]);
+        $statement->execute([
+            'url' => $url,
+            'interval' => $age
+        ]);
+        $row = $statement->fetch();
         
-        $details = array_map(function($row)
-        {
-            $analyzer = $row['analyzer'];
-            $flags = $row['flags'];
-            $score = $row['score'];
-            $message = $row['message'];
-            $startedAt = \DateTime::createFromFormat('Y-m-d H:i:s', $row['started_at']);
-            $finishedAt = \DateTime::createFromFormat('Y-m-d H:i:s', $row['finished_at']);
-            
-            return new AnalysisDetail(
-                $analyzer, 
-                $flags, 
-                $score, 
-                $message, 
-                $startedAt, 
-                $finishedAt
-            );
-        }, $statement->fetchAll());
-        
-        return new Analysis($url, $details, $startedAt, $finishedAt);
+        return $this->parse($row);
     }
 
     /**
@@ -101,5 +88,42 @@ class AnalysisRepository
         $this->connection->commit();
         
         return $analysisId;
+    }
+    
+    private function parse($row)
+    {
+        if(!$row)
+        {
+            return null;
+        }
+
+        $url = $row['url'];
+        $startedAt = \DateTime::createFromFormat('Y-m-d H:i:s', $row['started_at']);
+        $finishedAt = \DateTime::createFromFormat('Y-m-d H:i:s', $row['finished_at']);
+
+        $sql = 'SELECT * FROM analysis_detail WHERE analysis_id = :id;';
+        $statement = $this->connection->prepare($sql);
+        $statement->execute([ 'id' => $row['id'] ]);
+
+        $details = array_map(function($row)
+        {
+            $analyzer = $row['analyzer'];
+            $flags = $row['flags'];
+            $score = $row['score'];
+            $message = $row['message'];
+            $startedAt = \DateTime::createFromFormat('Y-m-d H:i:s', $row['started_at']);
+            $finishedAt = \DateTime::createFromFormat('Y-m-d H:i:s', $row['finished_at']);
+
+            return new AnalysisDetail(
+                $analyzer,
+                $flags,
+                $score,
+                $message,
+                $startedAt,
+                $finishedAt
+            );
+        }, $statement->fetchAll());
+
+        return new Analysis($url, $details, $startedAt, $finishedAt);
     }
 }

@@ -14,21 +14,25 @@ class Configuration
     private $dbPassword;
     /** @var string */
     private $seleniumHost;
+    /** @var integer */
+    private $cache;
 
     /**
      * @param string $dbHost
      * @param string $dbName
      * @param string $dbUser
      * @param string $dbPassword
-     * @param $seleniumHost
+     * @param string $seleniumHost
+     * @param integer $cache
      */
-    public function __construct($dbHost, $dbName, $dbUser, $dbPassword, $seleniumHost)
+    public function __construct($dbHost, $dbName, $dbUser, $dbPassword, $seleniumHost, $cache)
     {
         $this->dbHost = $dbHost;
         $this->dbName = $dbName;
         $this->dbUser = $dbUser;
         $this->dbPassword = $dbPassword;
         $this->seleniumHost = $seleniumHost;
+        $this->cache = $cache;
     }
 
     /**
@@ -69,5 +73,13 @@ class Configuration
     public function getSeleniumHost()
     {
         return $this->seleniumHost;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCache()
+    {
+        return $this->cache;
     }
 }

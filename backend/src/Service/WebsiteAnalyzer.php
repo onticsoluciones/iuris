@@ -12,6 +12,7 @@ use Ontic\Iuris\Model\Analysis;
 use Ontic\Iuris\Model\AnalysisRequest;
 use Ontic\Iuris\Model\Configuration;
 use Ontic\Iuris\Model\Flag;
+use Ontic\Iuris\Service\Repository\AnalysisRepository;
 
 class WebsiteAnalyzer
 {
@@ -21,22 +22,27 @@ class WebsiteAnalyzer
     private $pluginConfigurationLoader;
     /** @var Configuration */
     private $configuration;
+    /** @var AnalysisRepository */
+    private $analysisRepository;
 
     /**
      * @param PluginLoader $pluginLoader
      * @param PluginConfigurationLoader $pluginConfigurationLoader
      * @param Configuration $configuration
+     * @param AnalysisRepository $analysisRepository
      */
     public function __construct
     (
         PluginLoader $pluginLoader,
         PluginConfigurationLoader $pluginConfigurationLoader,
-        Configuration $configuration
+        Configuration $configuration,
+        AnalysisRepository $analysisRepository
     )
     {
         $this->pluginLoader = $pluginLoader;
         $this->configuration = $configuration;
         $this->pluginConfigurationLoader = $pluginConfigurationLoader;
+        $this->analysisRepository = $analysisRepository;
     }
 
     /**
@@ -46,6 +52,15 @@ class WebsiteAnalyzer
      */
     public function analyze($url)
     {
+        if($age = $this->configuration->getCache())
+        {
+            $analysis = $this->analysisRepository->find($url, $age);
+            if($analysis !== null)
+            {
+                return $analysis;
+            }
+        }
+        
         $analysis = new Analysis($url, [], new \DateTime(), null);
         
         $chromeOptions = new ChromeOptions();
