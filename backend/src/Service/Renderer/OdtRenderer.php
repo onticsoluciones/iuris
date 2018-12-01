@@ -68,21 +68,22 @@ class OdtRenderer
             // Message
             foreach(explode("\n", $detail->getMessage()) as $line)
             {
-                $table->addRow();
+                $table2=$section->addTable();
+                $table2->addRow();
                 if ($detail->getScore() == 100){
-                    $table->addCell(null,array('gridSpan' => 3, 'vMerge' => 'restart'))->addText(htmlspecialchars($line,ENT_XML1))->setFontStyle('titleOK');
+                    $table2->addCell(4000,['gridSpan' => 2])->addText(htmlspecialchars($line,ENT_XML1))->setFontStyle('titleOK');
                  }
                 elseif(strpos($line,'⚠')!== FALSE){
                     // $section->addText('   * Información del Fallo','info');
-                     $table->addCell(null,array('gridSpan' => 3, 'vMerge' => 'restart'))->addText(htmlspecialchars($line,ENT_XML1))->setFontStyle('titleWARN');
+                     $table2->addCell(4000,['gridSpan' => 2])->addText(htmlspecialchars($line,ENT_XML1))->setFontStyle('titleWARN');
                 }
                 else{
                     //$section->addText('   * Información del Fallo','info');
-                    $table->addCell(null,array('gridSpan' => 3, 'vMerge' => 'restart'))->addText(htmlspecialchars($line,ENT_XML1))->setFontStyle('titleFAIL');
+                    $table2->addCell(4000,['gridSpan' => 2])->addText(htmlspecialchars($line,ENT_XML1))->setFontStyle('titleFAIL');
                 }
             }
             //$section->addText('______________________________________________________________________________________________'    );
-            $section->addTextBreak('1');
+            $section->addTextBreak('2');
         }
 
             //$section->addText('__________________________________________________________________________');
