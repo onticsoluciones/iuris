@@ -22,6 +22,7 @@ try
 }
 catch (Exception $e)
 {
+    error_log($e);
     header('HTTP/1.1 500 Internal Server Error');
     error_log($e);
 }
