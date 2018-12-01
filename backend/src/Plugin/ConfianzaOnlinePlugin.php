@@ -38,13 +38,13 @@ class ConfianzaOnlinePlugin implements IPlugin
             $xpath = "//a[starts-with(@href, 'https://www.confianzaonline.es/empresas/')]";
             $request->getWebdriver()->findElement(WebDriverBy::xpath($xpath));
             $score = 100;
-            $message = '✓ Website enrolled in the Confianza Online program.';
+            $message = '✓ El sitio web está dentro del programa de Confianza Online.';
         } 
         /** @noinspection PhpRedundantCatchClauseInspection */ 
         catch(NoSuchElementException $ignored)
         {
             $score = 0;
-            $message = '⚠ Enroll in the Confianza Online program to increase your website reputation.';
+            $message = '⚠ Es recomendable formar parte del programa Confianza Online para aumentar la reputación del sitio web. Recomendamos visitar la web https://www.confianzaonline.es/empresas/unete-a-confianza-online/ para verificar los requisitos y adherirse al programa y adquirir el sello para incrustar en la web';
         }
         
         return new AnalysisDetail(
