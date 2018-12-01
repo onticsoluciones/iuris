@@ -33,6 +33,7 @@ Connect to iuris in http://localhost:8081
 cd /tmp
 curl "https://chromedriver.storage.googleapis.com/2.44/chromedriver_linux64.zip" | jar xv
 sudo mv chromedriver /usr/local/bin/chromedriver
+sudo chmod +x /usr/local/bin/chromedriver 
 ```
 
 ##### Download & launch Selenium Standalone Server
