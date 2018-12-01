@@ -19,3 +19,4 @@ session_cookies:
   citrix_ns_id: 'Citrix Firewall Session Cookie'
   adaptive_image: 'Use by Drupal to determine the optimal size of images'
   __cfduid: 'Cloudfare session cookie'
+  joomsef_lang: 'Language selected by the user'
